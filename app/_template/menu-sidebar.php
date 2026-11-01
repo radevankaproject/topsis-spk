@@ -1,51 +1,59 @@
+<?php
+$currM = $_GET['m'] ?? '';
+$currR = $_GET['r'] ?? '';
+$isHome = empty($currM) && empty($currR);
+$isMaster = in_array($currM, ['users', 'criteria', 'alternative']);
+?>
 <ul class="nav in side-menu">
-  <li>
-    <a href="<?php echo base_url(); ?>">
-      <i class="list-icon feather feather-command"></i> Dashboard
-    </a>
-  </li>
-  <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 1): ?>
-    <li class="menu-item-has-children">
+  <?php if ((int)($_SESSION['level'] ?? 0) === 1) : ?>
+    <li class="<?= $isHome ? 'active current-page' : ''; ?>">
+      <a href="<?= base_url(); ?>home">
+        <i class="list-icon feather feather-grid"></i>
+        <span class="hide-menu">Dashboard Koperasi</span>
+      </a>
+    </li>
+
+    <li class="menu-item-has-children <?= $isMaster ? 'active' : ''; ?>">
       <a href="javascript:void(0);">
-        <i class="list-icon feather feather-layers"></i>
+        <i class="list-icon feather feather-database"></i>
         <span class="hide-menu">Data Master</span>
       </a>
       <ul class="list-unstyled sub-menu">
-        <li>
-          <a href="<?php echo base_url(); ?>users">Anggota</a>
+        <li class="<?= ($currM === 'users') ? 'active' : ''; ?>">
+          <a href="<?= base_url(); ?>users"><i class="fas fa-users mr-2"></i> Data Pengguna</a>
         </li>
-        <li>
-          <a href="<?php echo base_url(); ?>criteria">Kriteria</a>
+        <li class="<?= ($currM === 'criteria') ? 'active' : ''; ?>">
+          <a href="<?= base_url(); ?>criteria"><i class="fas fa-sliders-h mr-2"></i> Data Kriteria</a>
         </li>
-        <li>
-          <a href="<?php echo base_url(); ?>alternative">Kriteria Alternatif</a>
+        <li class="<?= ($currM === 'alternative' && $currR === 'list') ? 'active' : ''; ?>">
+          <a href="<?= base_url(); ?>alternative"><i class="fas fa-clipboard-list mr-2"></i> Rekap Alternatif</a>
+        </li>
+        <li class="<?= ($currM === 'alternative' && $currR === 'add') ? 'active' : ''; ?>">
+          <a href="<?= base_url(); ?>alternative/add"><i class="fas fa-edit mr-2"></i> Input Alternatif</a>
         </li>
       </ul>
     </li>
-  <?php endif; ?>
 
-  <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 2): ?>
-    <li>
-      <a href="<?php echo base_url(); ?>alternative/add">
-        <i class="list-icon feather feather-edit"></i> Input
+    <li class="<?= ($currM === 'topsis') ? 'active current-page' : ''; ?>">
+      <a href="<?= base_url(); ?>topsis/results">
+        <i class="list-icon feather feather-award"></i>
+        <span class="hide-menu">Perhitungan TOPSIS</span>
+      </a>
+    </li>
+  <?php else : ?>
+    <li class="<?= ($currM === 'alternative' && $currR === 'add') ? 'active current-page' : ''; ?>">
+      <a href="<?= base_url(); ?>alternative/add">
+        <i class="list-icon feather feather-edit-3"></i>
+        <span class="hide-menu">Input Nilai Usaha</span>
       </a>
     </li>
   <?php endif; ?>
 
-  <li>
-    <a href="<?php echo base_url(); ?>topsis/results">
-      <i class="list-icon feather feather-fast-forward"></i> Perhitungan Topsis
-    </a>
-  </li>
-  <?php if (isset($_SESSION['username']) && ! empty($_SESSION['username'])): ?>
+  <?php if (!empty($_SESSION['username'])) : ?>
     <li>
-      <a href="<?php echo base_url(); ?>users/editProfile">
-        <i class="list-icon feather feather-settings"></i> Edit Profil
-      </a>
-    </li>
-    <li>
-      <a onclick="confirmLogout()">
-        <i class="list-icon feather feather-power"></i> Logout
+      <a href="javascript:void(0);" onclick="confirmLogout()">
+        <i class="list-icon feather feather-power"></i>
+        <span class="hide-menu">Keluar Sistem</span>
       </a>
     </li>
   <?php endif; ?>

@@ -1,0 +1,19 @@
+# Server & Panel Files (aaPanel / Nginx)
+.user.ini
+.well-known/
+404.html
+502.html
+index.html.bak
+
+# System Health Lock File
+sys_log.tmp
+
+# Dependencies & Build Artifacts
+node_modules/
+topsis-skripsi.zip
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

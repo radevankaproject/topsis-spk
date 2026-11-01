@@ -1,0 +1,948 @@
+/* ==========================================================================
+   KOPERASI INDONESIA MODERN THEME - KONSEP A
+   Palet Warna Resmi Logo Koperasi Indonesia:
+   - Hijau Beringin (Primary) : #00802B / #064E22
+   - Kuning Emas (Accent)     : #F5C400 / #FFD000
+   - Merah Perisai (Secondary): #D91B1B
+   - Putih & Mint Surface     : #FFFFFF / #F3F7F4
+   - Hitam Perisai (Text)     : #181C18
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --kop-green-deep: #043817;
+  --kop-green-dark: #064E22;
+  --kop-green: #00802B;
+  --kop-green-light: #10983D;
+  --kop-green-soft: #E8F5EC;
+  --kop-gold: #F5C400;
+  --kop-gold-bright: #FFD700;
+  --kop-gold-dark: #C89D00;
+  --kop-gold-soft: #FFF8DB;
+  --kop-red: #D91B1B;
+  --kop-red-dark: #B01212;
+  --kop-red-soft: #FDECEC;
+  --kop-dark: #181C18;
+  --kop-text: #263228;
+  --kop-muted: #607064;
+  --kop-bg: #F2F6F3;
+  --kop-surface: #FFFFFF;
+  --kop-border: #DCE6DF;
+  --kop-radius: 14px;
+  --kop-shadow: 0 6px 24px rgba(6, 78, 34, 0.06);
+  --kop-shadow-hover: 0 10px 30px rgba(6, 78, 34, 0.12);
+}
+
+body,
+button,
+input,
+select,
+textarea,
+table,
+.btn,
+.form-control,
+.badge,
+.nav,
+.dropdown-menu {
+  font-family: 'Roboto Slab', serif !important;
+}
+
+body {
+  background-color: var(--kop-bg) !important;
+  color: var(--kop-text) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.heading-font-family,
+.page-title-heading,
+.widget-title {
+  font-family: 'Roboto Slab', serif !important;
+  color: var(--kop-dark);
+}
+
+/* ==========================================================================
+   1. TOP NAVBAR & BRAND HEADER
+   ========================================================================== */
+.navbar {
+  background: var(--kop-surface) !important;
+  border-bottom: 1px solid var(--kop-border) !important;
+  box-shadow: 0 2px 16px rgba(6, 78, 34, 0.06) !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--kop-green) 0%, var(--kop-green) 55%, var(--kop-gold) 78%, var(--kop-red) 100%);
+  z-index: 101;
+}
+
+.navbar-header,
+.header-dark .navbar-header,
+.sidebar-light .navbar-header {
+  background: var(--kop-green-dark) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.navbar-brand,
+.navbar-brand.kop-brand,
+.logo-light .navbar-brand,
+.logo-dark .navbar-brand {
+  background: var(--kop-green-dark) !important;
+  border-bottom: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  padding: 0 14px !important;
+  height: 5rem !important;
+  width: 100% !important;
+  text-decoration: none !important;
+}
+
+.navbar-brand.kop-brand .kop-logo-img {
+  width: 38px !important;
+  height: 38px !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  background: #ffffff !important;
+  border-radius: 9px !important;
+  padding: 3px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  border: 1.5px solid var(--kop-gold) !important;
+  flex-shrink: 0 !important;
+}
+
+.navbar-brand.kop-brand .kop-brand-text {
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.2 !important;
+  text-align: left !important;
+  min-width: 0;
+}
+
+.navbar-brand.kop-brand .kop-brand-title {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.navbar-brand.kop-brand .kop-brand-sub {
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  color: var(--kop-gold-bright) !important;
+  letter-spacing: 0.4px !important;
+  white-space: nowrap !important;
+}
+
+body.sidebar-collapse .navbar-brand.kop-brand {
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+body.sidebar-collapse .navbar-brand.kop-brand .kop-brand-text {
+  display: none !important;
+}
+
+/* Remove default purple status circle on topbar avatar */
+.navbar-nav .avatar::before,
+.header-light .navbar-nav .avatar::before,
+.header-dark .navbar-nav .avatar::before {
+  display: none !important;
+  content: none !important;
+}
+
+.navbar-nav .avatar img {
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: cover !important;
+  background: #fff !important;
+}
+
+.navbar .sidebar-toggle a {
+  color: var(--kop-green-dark) !important;
+}
+
+.navbar .sidebar-toggle a:hover {
+  color: var(--kop-green) !important;
+  background: var(--kop-green-soft) !important;
+}
+
+.kop-topbar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--kop-green-soft);
+  color: var(--kop-green-dark);
+  border: 1px solid rgba(0, 128, 43, 0.2);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.kop-topbar-badge i {
+  color: var(--kop-green);
+}
+
+/* ==========================================================================
+   2. SIDEBAR (KONSEP A: DEEP BANYAN GREEN + GOLD ACCENT)
+   ========================================================================== */
+.site-sidebar {
+  background: linear-gradient(180deg, var(--kop-green-dark) 0%, var(--kop-green-deep) 100%) !important;
+  border-right: none !important;
+  box-shadow: 4px 0 20px rgba(4, 56, 23, 0.18) !important;
+}
+
+.side-user {
+  padding: 16px 12px 14px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.side-user .kop-user-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 196, 0, 0.25);
+  border-radius: 12px;
+  padding: 12px 10px;
+}
+
+.side-user .kop-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.side-user .kop-avatar-wrap img {
+  width: 54px !important;
+  height: 54px !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
+  border: 2.5px solid var(--kop-gold) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+  background: #ffffff !important;
+  padding: 2px !important;
+}
+
+.side-user .side-user-heading {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
+  line-height: 1.3 !important;
+  display: block;
+}
+
+.side-user .kop-role-pill {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--kop-gold);
+  color: var(--kop-dark);
+}
+
+/* Sidebar Navigation Links - Override style.css line-height & borders */
+.sidebar-nav .side-menu {
+  padding-top: 10px !important;
+  margin-top: 0 !important;
+  line-height: 1.35 !important;
+}
+
+.sidebar-nav .side-menu > li::after {
+  display: none !important;
+}
+
+.sidebar-nav .side-menu > li > a,
+.sidebar-expand .site-sidebar .side-menu > li > a {
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-weight: 600 !important;
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+  padding: 11px 14px !important;
+  margin: 4px 10px !important;
+  border-radius: 10px !important;
+  border-top: none !important;
+  border-left: 3px solid transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  transition: all 0.2s ease !important;
+}
+
+.sidebar-nav .side-menu > li > a i.list-icon {
+  color: var(--kop-gold) !important;
+  margin-right: 10px !important;
+  font-size: 16px !important;
+  top: 0 !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-nav .side-menu .menu-item-has-children > a::before {
+  color: rgba(255, 255, 255, 0.7) !important;
+  right: 12px !important;
+}
+
+.sidebar-nav .side-menu > li > a:hover,
+.sidebar-nav .side-menu > li.active > a,
+.sidebar-nav .side-menu > li.current-page > a {
+  background: rgba(245, 196, 0, 0.16) !important;
+  color: var(--kop-gold-bright) !important;
+  border-left: 3px solid var(--kop-gold) !important;
+}
+
+.sidebar-nav .side-menu > li > a:hover i.list-icon,
+.sidebar-nav .side-menu > li.active > a i.list-icon {
+  color: var(--kop-gold-bright) !important;
+  transform: translateX(2px);
+}
+
+.sidebar-nav .side-menu .sub-menu {
+  background: rgba(0, 0, 0, 0.24) !important;
+  margin: 2px 10px 6px 10px !important;
+  top: 0 !important;
+  border-radius: 8px !important;
+  padding: 6px 0 !important;
+}
+
+.sidebar-nav .side-menu .sub-menu li a {
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: 12.5px !important;
+  line-height: 1.4 !important;
+  padding: 8px 14px 8px 34px !important;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav .side-menu .sub-menu li a:hover,
+.sidebar-nav .side-menu .sub-menu li.active a {
+  color: var(--kop-gold-bright) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ==========================================================================
+   3. PAGE HEADER / BREADCRUMB (Override style.css fixed 4.42em height/line-height)
+   ========================================================================== */
+.page-title {
+  background: var(--kop-surface) !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+  border-radius: var(--kop-radius) !important;
+  padding: 16px 22px !important;
+  margin: 18px 0 22px 0 !important;
+  border: 1px solid var(--kop-border) !important;
+  border-left: 5px solid var(--kop-green) !important;
+  box-shadow: var(--kop-shadow) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+
+.page-title.clearfix::before,
+.page-title.clearfix::after {
+  display: none !important;
+  content: none !important;
+}
+
+.page-title .page-title-left {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  line-height: 1.3 !important;
+}
+
+.page-title .page-title-heading {
+  display: block !important;
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0 !important;
+  color: var(--kop-green-dark) !important;
+  margin: 0 !important;
+}
+
+.page-title .page-title-description {
+  display: block !important;
+  color: var(--kop-muted) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+  margin: 0 !important;
+}
+
+.page-title .page-title-right {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.page-title ol.breadcrumb,
+.page-title .breadcrumb {
+  background: var(--kop-green-soft) !important;
+  line-height: 1.4 !important;
+  padding: 6px 15px !important;
+  border-radius: 30px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  letter-spacing: 0 !important;
+}
+
+.page-title .breadcrumb-item {
+  font-size: 12.5px !important;
+  line-height: 1.4 !important;
+}
+
+.page-title .breadcrumb-item a {
+  color: var(--kop-green) !important;
+  font-weight: 600 !important;
+}
+
+.page-title .breadcrumb-item.active {
+  color: var(--kop-dark) !important;
+  font-weight: 700 !important;
+}
+
+/* ==========================================================================
+   4. WIDGETS, CARDS & KPI BOXES
+   ========================================================================== */
+.widget-bg {
+  background: var(--kop-surface) !important;
+  border-radius: var(--kop-radius) !important;
+  border: 1px solid var(--kop-border) !important;
+  box-shadow: var(--kop-shadow) !important;
+  padding: 22px !important;
+  transition: box-shadow 0.25s ease;
+}
+
+.widget-bg:hover {
+  box-shadow: var(--kop-shadow-hover) !important;
+}
+
+.widget-heading {
+  border-bottom: 1px solid var(--kop-border);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.widget-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--kop-green-dark) !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* KPI Summary Cards */
+.kop-kpi-card {
+  background: var(--kop-surface);
+  border-radius: var(--kop-radius);
+  border: 1px solid var(--kop-border);
+  box-shadow: var(--kop-shadow);
+  padding: 20px 20px 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kop-kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kop-shadow-hover);
+}
+
+.kop-kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 5px;
+}
+
+.kop-kpi-card.kpi-green::after,
+.kop-kpi-card.kop-kpi-green::after { background: var(--kop-green); }
+
+.kop-kpi-card.kpi-gold::after,
+.kop-kpi-card.kop-kpi-gold::after  { background: var(--kop-gold); }
+
+.kop-kpi-card.kpi-red::after,
+.kop-kpi-card.kop-kpi-red::after   { background: var(--kop-red); }
+
+.kop-kpi-card.kpi-dark::after,
+.kop-kpi-card.kop-kpi-dark::after  { background: var(--kop-green-dark); }
+
+.kop-kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  flex-shrink: 0;
+}
+
+.kpi-green .kop-kpi-icon,
+.kop-kpi-green .kop-kpi-icon { background: var(--kop-green-soft); color: var(--kop-green); }
+
+.kpi-gold .kop-kpi-icon,
+.kop-kpi-gold .kop-kpi-icon  { background: var(--kop-gold-soft);  color: #B28900; }
+
+.kpi-red .kop-kpi-icon,
+.kop-kpi-red .kop-kpi-icon   { background: var(--kop-red-soft);   color: var(--kop-red); }
+
+.kpi-dark .kop-kpi-icon,
+.kop-kpi-dark .kop-kpi-icon  { background: #E4ECE7;               color: var(--kop-green-dark); }
+
+.kop-kpi-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kop-kpi-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--kop-muted);
+  margin-bottom: 4px;
+}
+
+.kop-kpi-value {
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--kop-dark);
+  line-height: 1.2;
+  margin: 0 0 4px 0 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kop-kpi-sub {
+  font-size: 12px;
+  color: var(--kop-muted);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   5. TABLES & DATATABLES KOPERASI STYLING
+   ========================================================================== */
+table.table thead th,
+table.dataTable thead th,
+.thead-dark th {
+  background: var(--kop-green-dark) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  border-bottom: 3px solid var(--kop-gold) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  padding: 12px 14px !important;
+  vertical-align: middle !important;
+}
+
+table.table tbody td,
+table.dataTable tbody td {
+  vertical-align: middle !important;
+  padding: 11px 14px !important;
+  color: var(--kop-text);
+  font-size: 13.5px;
+  border-color: #E7EFEA !important;
+}
+
+table.table-striped tbody tr:nth-of-type(odd),
+table.dataTable.stripe tbody tr.odd,
+table.dataTable.display tbody tr.odd {
+  background-color: #F9FCFA !important;
+}
+
+table.table tbody tr:hover,
+table.dataTable.hover tbody tr:hover,
+table.dataTable.display tbody tr:hover {
+  background-color: var(--kop-green-soft) !important;
+}
+
+/* DataTables Export Buttons */
+.dt-buttons .dt-button,
+button.dt-button {
+  background: var(--kop-green-soft) !important;
+  color: var(--kop-green-dark) !important;
+  border: 1px solid rgba(0, 128, 43, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  margin-right: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.dt-buttons .dt-button:hover,
+button.dt-button:hover {
+  background: var(--kop-green) !important;
+  color: #FFFFFF !important;
+  border-color: var(--kop-green) !important;
+  box-shadow: 0 3px 10px rgba(0, 128, 43, 0.2) !important;
+}
+
+.dt-search input.dt-input {
+  border: 1.5px solid var(--kop-border) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  outline: none !important;
+}
+
+.dt-search input.dt-input:focus {
+  border-color: var(--kop-green) !important;
+  box-shadow: 0 0 0 3px rgba(0, 128, 43, 0.12) !important;
+}
+
+/* Rank Badges */
+.kop-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.kop-rank-1 {
+  background: linear-gradient(135deg, #FFD700 0%, #F5B700 100%);
+  color: #181C18;
+  box-shadow: 0 3px 8px rgba(245, 196, 0, 0.4);
+  border: 1px solid #E0A800;
+}
+
+.kop-rank-2 {
+  background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
+  color: #1E293B;
+  border: 1px solid #94A3B8;
+}
+
+.kop-rank-3 {
+  background: linear-gradient(135deg, #FCD34D 0%, #D97706 100%);
+  color: #FFFFFF;
+  border: 1px solid #B45309;
+}
+
+.kop-rank-other {
+  background: var(--kop-green-soft);
+  color: var(--kop-green-dark);
+  border: 1px solid rgba(0, 128, 43, 0.2);
+}
+
+/* ==========================================================================
+   6. BUTTONS, BADGES & FORMS
+   ========================================================================== */
+.btn-primary,
+.btn-color-scheme {
+  background: linear-gradient(135deg, var(--kop-green) 0%, var(--kop-green-dark) 100%) !important;
+  border-color: var(--kop-green-dark) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 128, 43, 0.22);
+  transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover,
+.btn-color-scheme:hover {
+  background: linear-gradient(135deg, var(--kop-green-light) 0%, var(--kop-green) 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 128, 43, 0.32);
+}
+
+.btn-warning {
+  background: var(--kop-gold) !important;
+  border-color: var(--kop-gold-dark) !important;
+  color: var(--kop-dark) !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+}
+
+.btn-warning:hover {
+  background: var(--kop-gold-bright) !important;
+  color: var(--kop-dark) !important;
+}
+
+.btn-danger {
+  background: var(--kop-red) !important;
+  border-color: var(--kop-red-dark) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+}
+
+.badge-success,
+.kop-badge-benefit {
+  background-color: var(--kop-green) !important;
+  color: #FFFFFF !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+}
+
+.badge-danger,
+.kop-badge-cost {
+  background-color: var(--kop-red) !important;
+  color: #FFFFFF !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+}
+
+.badge-primary {
+  background-color: var(--kop-green-dark) !important;
+  color: var(--kop-gold-bright) !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+}
+
+.form-control {
+  border-radius: 8px !important;
+  border: 1.5px solid var(--kop-border) !important;
+  padding: 9px 13px !important;
+  color: var(--kop-dark) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.form-control:focus {
+  border-color: var(--kop-green) !important;
+  box-shadow: 0 0 0 3px rgba(0, 128, 43, 0.14) !important;
+}
+
+label {
+  font-weight: 600 !important;
+  color: var(--kop-green-dark) !important;
+}
+
+/* ==========================================================================
+   7. TOPSIS STEP CARDS & FORMULA BOX
+   ========================================================================== */
+.kop-step-card {
+  border: 1px solid var(--kop-border);
+  border-radius: 12px;
+  background: #FFFFFF;
+  margin-bottom: 22px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(6, 78, 34, 0.04);
+}
+
+.kop-step-header {
+  background: linear-gradient(90deg, var(--kop-green-soft) 0%, #FFFFFF 100%);
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--kop-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kop-step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--kop-green-dark);
+  color: var(--kop-gold-bright);
+  font-weight: 800;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kop-step-title {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--kop-green-dark);
+}
+
+.kop-step-body {
+  padding: 18px 20px;
+}
+
+.formula {
+  font-family: serif;
+  font-size: 1.08em;
+  background-color: var(--kop-green-soft) !important;
+  padding: 10px 16px !important;
+  border-left: 4px solid var(--kop-green) !important;
+  border-radius: 0 8px 8px 0;
+  margin: 10px 0 16px 0 !important;
+  overflow-x: auto;
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+.footer {
+  background: var(--kop-surface) !important;
+  border-top: 1px solid var(--kop-border) !important;
+  color: var(--kop-muted) !important;
+  font-weight: 600;
+  padding: 14px 24px !important;
+}
+
+/* ==========================================================================
+   9. KOPERASI CIRCULAR PROGRESS PRELOADER OVERLAY
+   ========================================================================== */
+#kop-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: radial-gradient(circle at center, #145A32 0%, #063B1B 65%, #03220F 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#kop-preloader.kop-preloader-hide,
+#kop-preloader.kop-preloader-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.kop-loader-wrap {
+  position: relative;
+  width: 164px;
+  height: 164px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.kop-circular-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 12px rgba(245, 196, 0, 0.35));
+}
+
+.kop-circular-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 7;
+}
+
+.kop-circular-halo {
+  fill: none;
+  stroke: rgba(245, 196, 0, 0.25);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+  transform-origin: 80px 80px;
+  animation: kopSpinHalo 6s linear infinite;
+}
+
+.kop-circular-progress {
+  fill: none;
+  stroke: url(#kopCircleGrad);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 427.26;
+  stroke-dashoffset: 427.26;
+  transition: stroke-dashoffset 0.08s linear;
+}
+
+.kop-loader-logo-box {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4), inset 0 0 0 2px rgba(245, 196, 0, 0.45);
+  animation: kopPulseLogo 1.8s ease-in-out infinite;
+  z-index: 2;
+}
+
+.kop-loader-logo-box img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
+  object-fit: contain;
+}
+
+.kop-circular-pct {
+  position: absolute;
+  bottom: -8px;
+  background: linear-gradient(135deg, #F5C400 0%, #D99B00 100%);
+  color: #063B1B;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 99px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  z-index: 3;
+  letter-spacing: 0.5px;
+}
+
+.kop-loader-title {
+  color: #FFFFFF !important;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.kop-loader-sub {
+  color: #FFE066 !important;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  opacity: 0.92;
+}
+
+@keyframes kopSpinHalo {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes kopPulseLogo {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}

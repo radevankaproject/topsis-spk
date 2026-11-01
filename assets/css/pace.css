@@ -6,96 +6,40 @@
 /* Page Pre Loader
 ========================*/
 body:after {
-  content: "";
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99;
-  background: #fff; }
-
-body.pace-done:after {
-  display: none; }
+  display: none !important;
+}
 
 .pace {
+  pointer-events: none;
+  user-select: none;
   position: fixed;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background: #fff;
-  z-index: 100;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
-
-.pace-active {
-  opacity: 1;
-  visibility: visible; }
-
-.pace-active * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; }
+  right: 0;
+  height: 4px;
+  z-index: 100000;
+  background: transparent;
+}
 
 .pace-inactive {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.pace .pace-progress {
+  background: linear-gradient(90deg, #00802B 0%, #F5C400 60%, #D91B1B 100%);
+  position: fixed;
+  z-index: 100000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 4px;
+  box-shadow: 0 0 10px rgba(0, 128, 43, 0.5);
+}
 
 .pace-activity {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateY(-50%) translateX(-50%);
-          transform: translateY(-50%) translateX(-50%);
-  width: 1em;
-  height: 1em;
-  font-size: 70px;
-  display: block; }
-
-.pace-activity::before,
-.pace-activity::after {
-  content: "";
-  top: 0;
-  display: block;
-  width: 1em;
-  height: 1em;
-  position: absolute;
-  border-width: 0.5em;
-  border-style: double;
-  border-color: transparent;
-  border-radius: 1em;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-animation: spin 1.15s infinite;
-          animation: spin 1.15s infinite; }
-
-.pace-activity::before {
-  right: 0;
-  border-right-color: #8253eb;
-  -webkit-animation-delay: -0.29s;
-          animation-delay: -0.29s; }
-
-.pace-activity::after {
-  left: 0;
-  border-left-color: #8253eb; }
-
-@-webkit-keyframes spin {
-  from {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
-
-@keyframes spin {
-  from {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
+  display: none !important;
+}
 
 /*# sourceMappingURL=pace.css.map */

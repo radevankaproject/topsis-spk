@@ -1,12 +1,6 @@
 <?php
-// topsis-skripsi/route/web.php
+// route/web.php
 
-// controlWeb.php sudah di-include di index.php, jadi $db dan base_url() sudah tersedia secara global.
-// JANGAN include_once atau require_once controlWeb.php di sini lagi.
-// Jika Anda meng-include-nya di sini juga, itu bisa menyebabkan error "Cannot redeclare function"
-// atau masalah sesi karena session_start() dipanggil dua kali.
-
-#RoutesWeb
 function routes($m, $r)
 {
   global $db;
@@ -15,37 +9,40 @@ function routes($m, $r)
   global $alternativesList;
   global $criteriaList;
 
-  // --- PENANGANAN HOME/DASHBOARD ---
+  // Pastikan user sudah login
+  if (empty($_SESSION['username']) || empty($_SESSION['level'])) {
+    header('Location: ' . base_url('login'));
+    exit();
+  }
+
+  // Selain Admin (level != 1) hanya boleh mengakses alternative/add
+  if ((int)$_SESSION['level'] !== 1 && !($m === 'alternative' && $r === 'add')) {
+    header('Location: ' . base_url('alternative/add'));
+    exit();
+  }
+
+  // --- PENANGANAN HOME/DASHBOARD (Khusus Admin) ---
   if (empty($m) && empty($r)) {
-    // Panggil TopsisCalculator untuk mendapatkan data dashboard
     require_once __DIR__ . '/../app/controllers/TopsisCalculator.php';
     $topsis = new TopsisCalculator($db);
     $dashboardData = $topsis->getDashboardData();
 
-    // Pastikan variabel-variabel ini tersedia di home.php
     $rankingResults = $dashboardData['rankingResults'] ?? [];
     $criteriaInfo = $dashboardData['criteriaInfo'] ?? [];
     $criteriaTypes = $dashboardData['criteriaTypes'] ?? [];
 
-    return include "app/views/home/home.php"; // Ini akan memiliki akses ke variabel-variabel di atas
+    return include "app/views/home/home.php";
   }
-
 
   switch ($m) {
     case 'alternative':
       if ($r == 'add') {
-        // ... (kode yang sudah ada) ...
-        if (!isset($_SESSION['level']) || $_SESSION['level'] != 2) {
-          header('Location: ' . base_url('login'));
-          exit();
-        }
         require_once __DIR__ . '/../app/controllers/AlternativeControllers.php';
         showAlternativeForm();
         return include "app/views/alternative/$r.php";
       } elseif ($r == 'list') {
-        // ... (kode yang sudah ada) ...
-        if (!isset($_SESSION['level']) || $_SESSION['level'] != 1) {
-          header('Location: ' . base_url('home'));
+        if ((int)$_SESSION['level'] !== 1) {
+          header('Location: ' . base_url('alternative/add'));
           exit();
         }
         require_once __DIR__ . '/../app/controllers/AlternativeControllers.php';
@@ -56,67 +53,37 @@ function routes($m, $r)
 
     case 'topsis':
       if ($r == 'results') {
-        // ... (validasi level user jika diperlukan) ...
+        if ((int)$_SESSION['level'] !== 1) {
+          header('Location: ' . base_url('alternative/add'));
+          exit();
+        }
 
         require_once __DIR__ . '/../app/controllers/TopsisCalculator.php';
         $topsis = new TopsisCalculator($db);
-
-        // --- PENTING: Tangkap semua hasil dari calculate(), termasuk detailMatrices dan criteriaInfo ---
         $topsisData = $topsis->calculate();
 
-        // Pisahkan data ke variabel terpisah agar mudah diakses di view
         $rankingResults = $topsisData['rankingResults'] ?? [];
         $idealPositive  = $topsisData['idealPositive'] ?? [];
         $idealNegative  = $topsisData['idealNegative'] ?? [];
         $allUsersData   = $topsisData['allUsers'] ?? [];
-        // Tambahkan variabel baru untuk detail
         $detailMatrices = $topsisData['detailMatrices'] ?? [];
         $criteriaInfo   = $topsisData['criteriaInfo'] ?? [];
 
-
-        // Simpan hasil ke database (opsional)
         if (!isset($topsisData['error'])) {
           $topsis->saveRankingResults($rankingResults);
         }
 
-        // View akan memiliki akses ke $rankingResults, $idealPositive, $idealNegative,
-        // $allUsersData, $detailMatrices, dan $criteriaInfo
         return include "app/views/topsis/$r.php";
-      }
-      break;
-
-    case 'auth':
-      require_once __DIR__ . '/../app/controllers/AuthController.php';
-      $auth = new AuthController($db);
-
-      if ($r == 'register') {
-        return include "app/views/auth/register.php";
-      } elseif ($r == 'process-register') {
-        $auth->processRegister();
-        exit();
-      }
-      // Anda bisa menambahkan case untuk login, logout, dll di sini
-      break;
-
-    case 'ranking':
-      if ($r == 'list') {
-        // Hanya admin yang boleh melihat daftar peringkat
-        if (!isset($_SESSION['level']) || $_SESSION['level'] != 1) {
-          header('Location: ' . base_url('home'));
-          exit();
-        }
-        require_once __DIR__ . '/../app/controllers/TopsisCalculator.php';
-        $topsis = new TopsisCalculator($db);
-        // Panggil fungsi baru untuk mengambil data dari tabel ranking_results
-        $savedRankings = $topsis->getSavedRankings(); 
-        return include "app/views/ranking/list.php"; // Muat view baru
       }
       break;
 
     case 'users':
     case 'criteria':
     case 'dashboard':
-      // ... (kode yang sudah ada) ...
+      if ((int)$_SESSION['level'] !== 1) {
+        header('Location: ' . base_url('alternative/add'));
+        exit();
+      }
       return include "app/views/$m/$r.php";
       break;
 
@@ -125,6 +92,3 @@ function routes($m, $r)
       exit('Page not found');
   }
 }
-
-// Tidak perlu mendeklarasikan $criterias di luar fungsi routes(),
-// karena sudah ditangani sebagai global di dalam fungsi dan oleh TopsisCalculator.

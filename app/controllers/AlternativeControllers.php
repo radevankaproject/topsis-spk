@@ -127,7 +127,7 @@ function handleAddAlternative()
 {
   global $db;
 
-  if (!isset($_SESSION['level']) || $_SESSION['level'] != 2) {
+  if (empty($_SESSION['level']) || !in_array((int)$_SESSION['level'], [1, 2], true)) {
     header('HTTP/1.1 401 Unauthorized');
     exit();
   }
@@ -144,11 +144,16 @@ function handleAddAlternative()
     exit();
   }
 
-  $user_id = $_SESSION['user_id'] ?? null;
+  $isAdmin = ((int)$_SESSION['level'] === 1);
+  if ($isAdmin && !empty($_POST['target_user_id'])) {
+    $user_id = (int)$_POST['target_user_id'];
+  } else {
+    $user_id = (int)($_SESSION['user_id'] ?? 0);
+  }
 
   if (!$user_id) {
-    toastNotif('error', 'User ID tidak ditemukan. Harap login kembali.');
-    header("Location: " . base_url('login'));
+    toastNotif('error', 'User ID tidak ditemukan. Harap pilih peserta atau login kembali.');
+    header("Location: " . base_url('alternative/add'));
     exit();
   }
 
@@ -199,7 +204,8 @@ function handleAddAlternative()
     toastNotif('error', 'Terdapat masalah saat menyimpan nilai alternatif. Silakan periksa log.');
   }
 
-  header("Location: " . base_url('alternative/add'));
+  $redirectUrl = base_url('alternative/add') . ($isAdmin ? '?user_id=' . $user_id : '');
+  header("Location: " . $redirectUrl);
   exit();
 }
 

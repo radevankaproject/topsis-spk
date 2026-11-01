@@ -152,7 +152,7 @@ class TopsisCalculator
     });
 
     foreach ($results as $key => &$row) {
-      $row['peringkat'] = $key + 1;
+      $row['rank'] = $key + 1;
     }
 
     // --- Kembalikan semua matriks detail dalam satu array 'detailMatrices' ---
@@ -197,7 +197,7 @@ class TopsisCalculator
       return false;
     }
     foreach ($results as $row) {
-      $stmt->bind_param("idi", $row['user_id'], $row['score'], $row['peringkat']);
+      $stmt->bind_param("idi", $row['user_id'], $row['score'], $row['rank']);
       if (!$stmt->execute()) {
         error_log("Failed to insert ranking for user_id " . $row['user_id'] . ": " . $stmt->error);
       }
@@ -211,7 +211,7 @@ class TopsisCalculator
     $data = [];
 
     // 1. Ambil data ranking (untuk grafik peringkat dan statistik teratas)
-    $stmt = $this->db->prepare("SELECT r.user_id, r.score, r.peringkat, u.name AS user_name, u.img AS image FROM ranking r JOIN users u ON r.user_id = u.user_id ORDER BY r.peringkat ASC LIMIT 5");
+    $stmt = $this->db->prepare("SELECT r.user_id, r.score, r.peringkat AS `rank`, u.name AS user_name, u.img AS image FROM ranking r JOIN users u ON r.user_id = u.user_id ORDER BY r.peringkat ASC LIMIT 5");
     $stmt->execute();
     $result = $stmt->get_result();
     $data['rankingResults'] = $result->fetch_all(MYSQLI_ASSOC);

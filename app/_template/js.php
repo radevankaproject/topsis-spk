@@ -24,8 +24,35 @@
 <script src="<?= base_url(); ?>assets/js/custom.js"></script>
 <!-- <script src="http://localhost:35729/livereload.js"></script> -->
 <script>
+  function hideKopPreloader() {
+    var preloader = document.getElementById('kop-preloader');
+    if (preloader) {
+      preloader.classList.add('kop-preloader-hide');
+      setTimeout(function() {
+        preloader.style.display = 'none';
+      }, 420);
+    }
+  }
+
+  function showKopPreloader() {
+    var preloader = document.getElementById('kop-preloader');
+    var circle = document.getElementById('kop-progress-circle');
+    var pctEl = document.getElementById('kop-progress-pct');
+    if (preloader) {
+      preloader.style.display = 'flex';
+      preloader.classList.remove('kop-preloader-hide');
+      if (circle) {
+        circle.style.strokeDashoffset = 110;
+      }
+      if (pctEl) {
+        pctEl.textContent = '75%';
+      }
+    }
+  }
+
   function confirmLogout() {
     if (confirm("Apakah Anda yakin ingin logout?")) {
+      showKopPreloader();
       window.location.href = "<?= base_url('out') ?>";
     }
   }
